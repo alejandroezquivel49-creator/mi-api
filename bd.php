@@ -1,19 +1,22 @@
 <?php
-$host = "sql201.infinityfree.com";
-$user = "if0_39929555";
-$password = "fbyRgGhqxolvny";
-$dbname = "if0_39929555_recopedi";
+// db.php – Conexión a MySQL usando variables de entorno
 
-$dsn = "mysql:host=$host;dbname=$dbname;charset=utf8mb4";
+// Tomamos las variables de entorno, si no existen usamos valores por defecto
+$host = getenv("DB_HOST") ?: "DOMINIO_PROXY_TCP_FERROCARRIL";
+$user = getenv("DB_USER") ?: "raíz";
+$pass = getenv("DB_PASS") ?: "yHiysFSKSfBaMRyXTjSSnIQPiZPfmDoQ";
+$db   = getenv("DB_NAME") ?: "ferrocarril";
+$port = getenv("DB_PORT") ?: 3306;
 
-$options = [
-    PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-    PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-    PDO::ATTR_EMULATE_PREPARES => false,
-];
+// Crear la conexión
+$conn = new mysqli($host, $user, $pass, $db, $port);
 
-try {
-    $pdo = new PDO($dsn, $user, $password, $options);
-} catch (PDOException $e) {
-    die(json_encode(["success" => false, "message" => "Conexión fallida: " . $e->getMessage()]));
+// Revisar errores
+if ($conn->connect_error) {
+    die("Conexión fallida: " . $conn->connect_error);
 }
+
+// Opcional: establecer el charset a UTF-8
+$conn->set_charset("utf8");
+
+?>
