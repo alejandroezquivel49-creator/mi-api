@@ -1,0 +1,21 @@
+roles
+registro
+productos
+pedidos_cocina
+pedidos
+notificar_cliente
+login
+listar_pedidos
+guardar_compra
+getReporteCocina
+getReporteCaja
+estados
+empleados
+crear_pedido
+cors
+categorias
+cancelar_pago
+bd
+carpeta uploads 
+
+
